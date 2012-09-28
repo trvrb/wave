@@ -31,12 +31,18 @@ public class Recovered {
     	storedValue = v;
     }    
     	
-	public void incrementStoredValue(double delta) {
-		storedValue += delta;
-		if (storedValue > 1)
+	public void incrementStoredValue(double dx) {
+		storedValue += dx;
+		if (storedValue > 1) {
 			storedValue = 1;
-		if (storedValue < 0)
+		}
+	}
+	
+	public void decrementStoredValue(double dx) {
+		storedValue -= dx;
+		if (storedValue < 0) {
 			storedValue = 0;
+		}
 	}
 	
 	public void pushStoredValue() {

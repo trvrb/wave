@@ -21,11 +21,17 @@ public class Susceptible {
 	
 	public void incrementStoredValue(double dx) {
 		storedValue += dx;
-		if (storedValue > 1)
+		if (storedValue > 1) {
 			storedValue = 1;
-		if (storedValue < 0)
-			storedValue = 0;
+		}
 	}
+	
+	public void decrementStoredValue(double dx) {
+		storedValue -= dx;
+		if (storedValue < 0) {
+			storedValue = 0;
+		}
+	}	
 	
 	public void pushStoredValue() {
 		value = storedValue;

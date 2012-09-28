@@ -10,12 +10,17 @@ public class Wave {
 		infecteds.print();	
 		recovereds.print();	
 		
-		forces.contact();
-		forces.pushStoredValues();
+		forces.step();
 		
 		susceptible.print();
 		infecteds.print();	
 		recovereds.print();	
+		
+		forces.step();
+		
+		susceptible.print();
+		infecteds.print();	
+		recovereds.print();			
 
 	}
 }

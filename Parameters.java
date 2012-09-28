@@ -4,15 +4,12 @@
 public class Parameters {
 
 	// simulation parameters
-	public static int day = 0;
-	
-	// space parameters
+	public static double time = 0;									// start time of simulation
+	public static final double dt = 0.1;							// time step of simulation
 	public static final double dxy = 0.01;							// lattice spacing
-
-	// host parameters
-	public static final double birthRate = 0.000091;				// in births per individual per day, 1/30 years = 0.000091
 		
 	// epidemiological parameters
+	public static final double birthRate = 0.000091;				// in births per individual per day, 1/30 years = 0.000091
 	public static final double initialIProportion = 0.01;			// as proportion of population
 	public static final int initialIPosition = 1;					// as index
 	public static final double initialRProportion = 0.5; 			// as proportion of population

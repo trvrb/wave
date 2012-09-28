@@ -11,17 +11,28 @@ public class Forces {
     	infecteds = inf;
     	recovereds = rec;
     }
+    
+    public void step() {
+    
+    	contact();
+    	recovery();
+    	pushStoredValues();
+    	Parameters.time += Parameters.dt;
+    
+    }
 
 	public void contact() {
 	
-		// find tranmissions from infecteds to susceptibles
+		// find tranmissions between susceptibles and infecteds: S -> I
 		for (Infected inf : infecteds) {
-			double newInfections = Parameters.beta * susceptible.getValue() * inf.getValue();
-			susceptible.incrementStoredValue(-1*newInfections);
+		
+			double newInfections = Parameters.beta * susceptible.getValue() * inf.getValue() * Parameters.dt;
+			susceptible.decrementStoredValue(newInfections);
 			inf.incrementStoredValue(newInfections);
+			
 		}
 		
-		// find transmission from infecteds to recovereds
+		// find transmissions between recovereds and infecteds: R -> I
 		for (Infected inf : infecteds) {
 			for (Recovered rec : recovereds) {
 
@@ -31,8 +42,8 @@ public class Forces {
 				double transmissability = euclideanDistance * Parameters.riskByDistance;
 				if (transmissability > 1) { transmissability = 1; }
 				
-				double newInfections = Parameters.beta * transmissability * rec.getValue() * inf.getValue();
-				rec.incrementStoredValue(-1*newInfections);
+				double newInfections = Parameters.beta * transmissability * rec.getValue() * inf.getValue() * Parameters.dt;
+				rec.decrementStoredValue(newInfections);
 				inf.incrementStoredValue(newInfections);
 
 			}
@@ -40,6 +51,23 @@ public class Forces {
 		
 	}
 	
+	public void recovery() {
+	
+		// find recoveries of infecteds: I -> R
+		for (Infected inf : infecteds) {
+		
+			double x = inf.getXPos();
+			double y = inf.getYPos();
+			Recovered rec = recovereds.getPosition(x, y);
+			
+			double newRecoveries = Parameters.nu * inf.getValue() * Parameters.dt;
+			inf.decrementStoredValue(newRecoveries);
+			rec.incrementStoredValue(newRecoveries);
+			
+		}
+	
+	}
+		
 	public void pushStoredValues() {
 	
 		susceptible.pushStoredValue();
