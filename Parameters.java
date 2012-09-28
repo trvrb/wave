@@ -9,7 +9,7 @@ public class Parameters {
 	public static final double dxy = 0.01;							// lattice spacing
 		
 	// epidemiological parameters
-	public static final double birthRate = 0.000091;				// in births per individual per day, 1/30 years = 0.000091
+	public static final double birthDeath = 0.000091;				// in births per individual per day, 1/30 years = 0.000091
 	public static final double initialIProportion = 0.01;			// as proportion of population
 	public static final int initialIPosition = 1;					// as index
 	public static final double initialRProportion = 0.5; 			// as proportion of population

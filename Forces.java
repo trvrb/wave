@@ -14,10 +14,29 @@ public class Forces {
     
     public void step() {
     
-    	contact();
-    	recovery();
+    	birthDeath();
+ 		contact();
+ 		recovery();
     	pushStoredValues();
     	Parameters.time += Parameters.dt;
+    
+    }
+      
+    public void birthDeath() {
+    
+    	// an equal number of hosts are born into and die from the susceptible pool: S -> S 
+    	
+    	for (Infected inf : infecteds) {
+    		double newDeaths = Parameters.birthDeath * inf.getValue() * Parameters.dt;
+    		inf.decrementStoredValue(newDeaths);
+    		susceptible.incrementStoredValue(newDeaths);
+    	}
+    	
+    	for (Recovered rec : recovereds) {
+    		double newDeaths = Parameters.birthDeath * rec.getValue() * Parameters.dt;
+    		rec.decrementStoredValue(newDeaths);
+    		susceptible.incrementStoredValue(newDeaths);
+    	}    	
     
     }
 
