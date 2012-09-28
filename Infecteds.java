@@ -7,36 +7,24 @@ public class Infecteds implements Iterable<Infected> {
 
     private List<Infected> infecteds = new ArrayList<Infected>();
 	
-    public Infecteds(double min, double max, double dx) {
-    
-    	for (double x=min; x<max; x+=dx) {
-    		Infected inf = new Infected(x, 0);
-    		infecteds.add(inf);
-    	}
-    	    
+    public Infecteds() {
+    	Infected inf = new Infected(Parameters.initialIPosition, Parameters.initialIProportion);
+    	infecteds.add(inf);	    
     }
     
-    public void initialize() {
-    	Infected inf = getPosition(Parameters.initialIPosition);
-    	inf.setValues(Parameters.initialIProportion);
-    }    
-
-	// return closest Infected to this position
 	public Infected getPosition(double pos) {
 	
-		// find closest index to position
-		int index = 0;
-    	double dist = 100;
-    	for (int i = 0; i < infecteds.size(); i++) {
-    		Infected inf = infecteds.get(i);
-    		double thisDist = Math.abs(inf.getPosition() - pos);
-    		if (thisDist < dist) {
-    			dist = thisDist;
-    			index = i;
-    		}
+		// return Infected matching this position
+    	for (Infected inf : infecteds) {
+    		double dist = Math.abs(inf.getPosition() - pos);
+    		if (dist < 0.5 * Parameters.dx)
+    			return inf;
     	}
     	
-    	return infecteds.get(index);
+    	// if no Infected exists, create one
+    	Infected inf = new Infected(pos, 0);
+    	infecteds.add(inf);
+    	return inf;
     	
 	}      
   

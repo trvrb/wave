@@ -6,15 +6,10 @@ public class Susceptible {
 	private double storedValue;
 	
     public Susceptible() {
-    	value = 0;    
-    	storedValue = 0;
+    	value = 1 - Parameters.initialIProportion - Parameters.initialRProportion;;    
+    	storedValue = 1 - Parameters.initialIProportion - Parameters.initialRProportion;;
     }
-    
-    public void initialize() {
-    	double initialValue = 1 - Parameters.initialIProportion - Parameters.initialRProportion;
-    	setValues(initialValue);
-    }
-        
+          
     public double getValue() {
     	return value;
     }      
