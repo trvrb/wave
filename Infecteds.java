@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-public class Infecteds {
+public class Infecteds implements Iterable<Infected> {
 
     private List<Infected> infecteds = new ArrayList<Infected>();
 	
@@ -33,13 +35,31 @@ public class Infecteds {
     	inf.setValues(Parameters.initialIProportion);
     
     }        
-
+  
 	public void print() {
         for (Infected inf : infecteds) {
         	inf.print();
         }	
 	}
 	
-	
+	public Iterator<Infected> iterator(){
+
+		return new Iterator<Infected>() {
+			private int count=0;
+		
+			public boolean hasNext(){
+				return count < infecteds.size();
+			}
+		
+			public Infected next(){
+				return infecteds.get(count++); 
+			}
+		
+			public void remove(){
+				throw new UnsupportedOperationException();
+			}
+		};
+		
+	}    	
 
 }

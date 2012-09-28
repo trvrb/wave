@@ -3,11 +3,11 @@
 
 public class Contact {
 
-//	public static void contactSusceptibles(Susceptibles sus, Infecteds inf) {
+	public static void contactSusceptibles(Susceptible sus, Infecteds inf) {
 	
 		// compare susceptibles to each infected phenotype
 		
 		
-//	}
+	}
 
 }

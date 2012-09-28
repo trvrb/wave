@@ -1,17 +1,25 @@
 public class Wave {
     public static void main(String[] args) {
 
-		Susceptible sus = new Susceptible();
-		Infecteds inf = new Infecteds(0, 10, 0.5);	
-		Recovereds rec = new Recovereds(0, 10, 0.5);
+		Susceptible susceptible = new Susceptible();
+		Infecteds infecteds = new Infecteds(0, 10, 0.5);	
+		Recovereds recovereds = new Recovereds(0, 10, 0.5);
 		
-		sus.initialize();
-		inf.initialize();		
-		rec.initialize();
+		susceptible.initialize();
+		infecteds.initialize();		
+		recovereds.initialize();
 		
-		sus.print();
-		inf.print();	
-		rec.print();	
+//		susceptible.print();
+//		infecteds.print();	
+//		recovereds.print();	
+		
+		for (Infected inf : infecteds) {
+			inf.print();
+		}
+		
+		for (Recovered rec : recovereds) {
+			rec.print();
+		}		
 
 	}
 }

@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-public class Recovereds {
+public class Recovereds implements Iterable<Recovered> {
 
     private List<Recovered> recovereds = new ArrayList<Recovered>();
 	
@@ -40,6 +42,24 @@ public class Recovereds {
         }	
 	}
 	
-	
+	public Iterator<Recovered> iterator(){
+
+		return new Iterator<Recovered>() {
+			private int count=0;
+		
+			public boolean hasNext(){
+				return count < recovereds.size();
+			}
+		
+			public Recovered next(){
+				return recovereds.get(count++); 
+			}
+		
+			public void remove(){
+				throw new UnsupportedOperationException();
+			}
+		};
+		
+	}    		
 
 }
