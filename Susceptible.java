@@ -9,8 +9,22 @@ public class Susceptible {
     	value = 0;    
     	storedValue = 0;
     }
+    
+    public void initialize() {
+    	double initialValue = 1 - Parameters.initialIProportion - Parameters.initialRProportion;
+    	setValues(initialValue);
+    }
+        
+    public double getValue() {
+    	return value;
+    }      
+    
+    public void setValues(double x) {
+    	value = x;
+    	storedValue = x;
+    }
 	
-	public void updateStoredValue(double dx) {
+	public void incrementStoredValue(double dx) {
 		storedValue += dx;
 		if (storedValue > 1)
 			storedValue = 1;

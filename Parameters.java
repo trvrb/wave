@@ -11,9 +11,9 @@ public class Parameters {
 		
 	// epidemiological parameters
 	public static final double initialIProportion = 0.01;			// as proportion of population
-	public static final int initialIPhenotype = 1;					// as index
+	public static final int initialIPosition = 1;					// as index
 	public static final double initialRProportion = 0.5; 			// as proportion of population
-	public static final int initialRPhenotype = 0;					// as index	
+	public static final int initialRPosition = 0;					// as index	
 	public static final double beta = 0.3;							// in contacts per individual per day
 	public static final double nu = 0.2;							// in recoveries per individual per day
 		

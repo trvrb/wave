@@ -2,17 +2,30 @@
 
 public class Infected {
 
-	private double phenotype;
+	private double position;
 	private double value;
 	private double storedValue;
 	
     public Infected(double p, double v) {
-    	phenotype = p;
+    	position = p;
     	value = v;    
     	storedValue = v;    	
     }
+    
+    public double getPosition() {
+    	return position;
+    }
+    
+    public double getValue() {
+    	return value;
+    }    
 	
-	public void updateStoredValue(double dx) {
+    public void setValues(double x) {
+    	value = x;
+    	storedValue = x;
+    }	
+	
+	public void incrementStoredValue(double dx) {
 		storedValue += dx;
 		if (storedValue > 1)
 			storedValue = 1;
@@ -25,7 +38,7 @@ public class Infected {
 	}
 
 	public void print() {
-		System.out.println("I " + phenotype + " = " + value);
+		System.out.println("I " + position + " = " + value);
 	}
 		
 }
