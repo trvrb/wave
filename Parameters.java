@@ -18,7 +18,8 @@ public class Parameters {
 	public static final double nu = 0.2;							// in recoveries per individual per day
 		
 	// phenotype parameters
-	public static final double muPhenotype = 0.005; 				// in mutations per individual per day
+	public static final double mu = 0.005; 							// in mutations per individual per day
+	public static final boolean mutation2D = false;					// mutate in one or two dimensions
 	public static final double riskByDistance = 0.1;				// one unit of distance increases transmissability by this amount	
 		
 }

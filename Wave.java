@@ -20,6 +20,12 @@ public class Wave {
 		
 		susceptible.print();
 		infecteds.print();	
+		recovereds.print();	
+		
+		forces.step();
+		
+		susceptible.print();
+		infecteds.print();	
 		recovereds.print();			
 
 	}

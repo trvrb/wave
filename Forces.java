@@ -17,6 +17,7 @@ public class Forces {
     	birthDeath();
  		contact();
  		recovery();
+ 		mutation();
     	pushStoredValues();
     	Parameters.time += Parameters.dt;
     
@@ -83,6 +84,52 @@ public class Forces {
 			inf.decrementStoredValue(newRecoveries);
 			rec.incrementStoredValue(newRecoveries);
 			
+		}
+	
+	}
+	
+	public void mutation() {
+	
+		// infecteds mutate to new varieties of infecteds: I_i -> I_j
+		for (Infected inf : infecteds) {
+		
+			double x = inf.getXPos();
+			double y = inf.getYPos();
+		
+			double split = 0.5;
+			if (Parameters.mutation2D) {
+				split = 0.25;
+			}
+			double newMutations = split * Parameters.mu * inf.getValue() * Parameters.dt;
+		
+			if (newMutations > 0) {
+		
+				// LEFT MUTATIONS
+				Infected leftMut = infecteds.getPosition(x - Parameters.dxy, y);
+				inf.decrementStoredValue(newMutations);
+				leftMut.incrementStoredValue(newMutations);
+				
+				// RIGHT MUTATIONS
+				Infected rightMut = infecteds.getPosition(x + Parameters.dxy, y);
+				inf.decrementStoredValue(newMutations);
+				rightMut.incrementStoredValue(newMutations);		
+				
+				if (Parameters.mutation2D) {
+				
+					// DOWN MUTATIONS
+					Infected downMut = infecteds.getPosition(x, y - Parameters.dxy);
+					inf.decrementStoredValue(newMutations);
+					downMut.incrementStoredValue(newMutations);
+					
+					// UP MUTATIONS
+					Infected upMut = infecteds.getPosition(x, y + Parameters.dxy);
+					inf.decrementStoredValue(newMutations);
+					upMut.incrementStoredValue(newMutations);				
+				
+				}
+			
+			}
+		
 		}
 	
 	}
