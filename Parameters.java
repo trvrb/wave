@@ -22,6 +22,6 @@ public class Parameters {
 		
 	// phenotype parameters
 	public static final double muPhenotype = 0.005; 				// in mutations per individual per day
-	public static final double distanceConversion = 0.07;			// multiplier to distance to give cross-immunity	
+	public static final double riskByDistance = 0.1;				// one unit of distance increases transmissability by this amount	
 		
 }

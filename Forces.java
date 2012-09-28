@@ -22,16 +22,22 @@ public class Forces {
 		}
 		
 		// find transmission from infecteds to recovereds
-/*		for (Infected inf : infecteds) {
+		for (Infected inf : infecteds) {
 			for (Recovered rec : recovereds) {
 
-				double newInfections = Parameters.beta * susceptible.getValue() * inf.getValue();
-				susceptible.incrementStoredValue(-1*newInfections);
+				double xDist = Math.abs(inf.getXPos() - rec.getXPos());
+				double yDist = Math.abs(inf.getYPos() - rec.getYPos());
+				double euclideanDistance = Math.sqrt(xDist*xDist + yDist*yDist);
+				double transmissability = euclideanDistance * Parameters.riskByDistance;
+				if (transmissability > 1) { transmissability = 1; }
+				
+				double newInfections = Parameters.beta * transmissability * rec.getValue() * inf.getValue();
+				rec.incrementStoredValue(-1*newInfections);
 				inf.incrementStoredValue(newInfections);
 
 			}
 		}		
-*/		
+		
 	}
 	
 	public void pushStoredValues() {
