@@ -17,24 +17,28 @@ public class Recovereds implements Iterable<Recovered> {
     }
     
     public void initialize() {
-    
-    	// find closest index to position
-    	int index = 0;
+    	Recovered rec = getPosition(Parameters.initialRPosition);
+    	rec.setValues(Parameters.initialRProportion);
+    }    
+
+	// return closest Recovered to this position
+	public Recovered getPosition(double pos) {
+	
+		// find closest index to position
+		int index = 0;
     	double dist = 100;
     	for (int i = 0; i < recovereds.size(); i++) {
     		Recovered rec = recovereds.get(i);
-    		double thisDist = Math.abs(rec.getPosition() - Parameters.initialRPosition);
+    		double thisDist = Math.abs(rec.getPosition() - pos);
     		if (thisDist < dist) {
     			dist = thisDist;
     			index = i;
     		}
     	}
     	
-    	// update this recovered
-    	Recovered rec = recovereds.get(index);
-    	rec.setValues(Parameters.initialRProportion);
-    
-    }    
+    	return recovereds.get(index);
+    	
+	}
 
 	public void print() {
         for (Recovered rec : recovereds) {
