@@ -8,21 +8,23 @@ public class Recovereds implements Iterable<Recovered> {
     private List<Recovered> recovereds = new ArrayList<Recovered>();
 	
     public Recovereds() {
-    	Recovered rec = new Recovered(Parameters.initialRPosition, Parameters.initialRProportion);
+    	Recovered rec = new Recovered(Parameters.initialRPosition, 0, Parameters.initialRProportion);
     	recovereds.add(rec);	    
     }
     
-	public Recovered getPosition(double pos) {
+	public Recovered getPosition(double x, double y) {
 	
 		// return Recovered matching this position
     	for (Recovered rec : recovereds) {
-    		double dist = Math.abs(rec.getPosition() - pos);
-    		if (dist < 0.5 * Parameters.dx)
+    		double xDist = Math.abs(rec.getXPos() - x);
+    		double yDist = Math.abs(rec.getYPos() - y);
+    		if (xDist < 0.5 * Parameters.dxy && yDist < 0.5 * Parameters.dxy) {
     			return rec;
+    		}
     	}
     	
     	// if no Recovered exists, create one
-    	Recovered rec = new Recovered(pos, 0);
+    	Recovered rec = new Recovered(x, y, 0);
     	recovereds.add(rec);
     	return rec;
     	

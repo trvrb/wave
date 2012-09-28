@@ -7,7 +7,7 @@ public class Parameters {
 	public static int day = 0;
 	
 	// space parameters
-	public static final double dx = 0.01;							// lattice spacing
+	public static final double dxy = 0.01;							// lattice spacing
 
 	// host parameters
 	public static final double birthRate = 0.000091;				// in births per individual per day, 1/30 years = 0.000091

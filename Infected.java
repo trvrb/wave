@@ -2,31 +2,37 @@
 
 public class Infected {
 
-	private double position;
+	private double xPos;
+	private double yPos;	
 	private double value;
 	private double storedValue;
 	
-    public Infected(double p, double v) {
-    	position = p;
+    public Infected(double x, double y, double v) {
+    	xPos = x;
+    	yPos = y;
     	value = v;    
     	storedValue = v;    	
     }
     
-    public double getPosition() {
-    	return position;
+    public double getXPos() {
+    	return xPos;
     }
+    
+    public double getYPos() {
+    	return yPos;
+    }    
     
     public double getValue() {
     	return value;
     }    
 	
-    public void setValues(double x) {
-    	value = x;
-    	storedValue = x;
+    public void setValues(double v) {
+    	value = v;
+    	storedValue = v;
     }	
 	
-	public void incrementStoredValue(double dx) {
-		storedValue += dx;
+	public void incrementStoredValue(double delta) {
+		storedValue += delta;
 		if (storedValue > 1)
 			storedValue = 1;
 		if (storedValue < 0)
@@ -38,7 +44,7 @@ public class Infected {
 	}
 
 	public void print() {
-		System.out.println("I " + position + " = " + value);
+		System.out.println("I (" + xPos + "," + yPos + ") = " + value);
 	}
 		
 }

@@ -8,21 +8,23 @@ public class Infecteds implements Iterable<Infected> {
     private List<Infected> infecteds = new ArrayList<Infected>();
 	
     public Infecteds() {
-    	Infected inf = new Infected(Parameters.initialIPosition, Parameters.initialIProportion);
+    	Infected inf = new Infected(Parameters.initialIPosition, 0, Parameters.initialIProportion);
     	infecteds.add(inf);	    
     }
     
-	public Infected getPosition(double pos) {
+	public Infected getPosition(double x, double y) {
 	
 		// return Infected matching this position
     	for (Infected inf : infecteds) {
-    		double dist = Math.abs(inf.getPosition() - pos);
-    		if (dist < 0.5 * Parameters.dx)
+    		double xDist = Math.abs(inf.getXPos() - x);
+    		double yDist = Math.abs(inf.getYPos() - y);
+    		if (xDist < 0.5 * Parameters.dxy && yDist < 0.5 * Parameters.dxy) {
     			return inf;
+    		}
     	}
     	
     	// if no Infected exists, create one
-    	Infected inf = new Infected(pos, 0);
+    	Infected inf = new Infected(x, y, 0);
     	infecteds.add(inf);
     	return inf;
     	
