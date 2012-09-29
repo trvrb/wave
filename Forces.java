@@ -2,11 +2,11 @@
 
 public class Forces {
 
-	private Susceptible susceptible;
-	private Infecteds infecteds;
-	private Recovereds recovereds;
+	private Class susceptible;
+	private ClassSet infecteds;
+	private ClassSet recovereds;
 
-    public Forces(Susceptible sus, Infecteds inf, Recovereds rec) {
+    public Forces(Class sus, ClassSet inf, ClassSet rec) {
     	susceptible = sus;
     	infecteds = inf;
     	recovereds = rec;
@@ -28,13 +28,13 @@ public class Forces {
     
     	// an equal number of hosts are born into and die from the susceptible pool: S -> S 
     	
-    	for (Infected inf : infecteds) {
+    	for (Class inf : infecteds) {
     		double newDeaths = Parameters.birthDeath * inf.getValue() * Parameters.dt;
     		inf.decrementStoredValue(newDeaths);
     		susceptible.incrementStoredValue(newDeaths);
     	}
     	
-    	for (Recovered rec : recovereds) {
+    	for (Class rec : recovereds) {
     		double newDeaths = Parameters.birthDeath * rec.getValue() * Parameters.dt;
     		rec.decrementStoredValue(newDeaths);
     		susceptible.incrementStoredValue(newDeaths);
@@ -45,7 +45,7 @@ public class Forces {
 	public void contact() {
 	
 		// find tranmissions between susceptibles and infecteds: S -> I
-		for (Infected inf : infecteds) {
+		for (Class inf : infecteds) {
 		
 			double newInfections = Parameters.beta * susceptible.getValue() * inf.getValue() * Parameters.dt;
 			susceptible.decrementStoredValue(newInfections);
@@ -54,8 +54,8 @@ public class Forces {
 		}
 		
 		// find transmissions between recovereds and infecteds: R -> I
-		for (Infected inf : infecteds) {
-			for (Recovered rec : recovereds) {
+		for (Class inf : infecteds) {
+			for (Class rec : recovereds) {
 
 				double xDist = Math.abs(inf.getXPos() - rec.getXPos());
 				double yDist = Math.abs(inf.getYPos() - rec.getYPos());
@@ -75,11 +75,11 @@ public class Forces {
 	public void recovery() {
 	
 		// find recoveries of infecteds: I -> R
-		for (Infected inf : infecteds) {
+		for (Class inf : infecteds) {
 		
 			double x = inf.getXPos();
 			double y = inf.getYPos();
-			Recovered rec = recovereds.getPosition(x, y);
+			Class rec = recovereds.getPosition(x, y);
 			
 			double newRecoveries = Parameters.nu * inf.getValue() * Parameters.dt;
 			inf.decrementStoredValue(newRecoveries);
@@ -92,7 +92,7 @@ public class Forces {
 	public void mutation() {
 	
 		// infecteds mutate to new varieties of infecteds: I_i -> I_j
-		for (Infected inf : infecteds) {
+		for (Class inf : infecteds) {
 		
 			double x = inf.getXPos();
 			double y = inf.getYPos();
@@ -106,24 +106,24 @@ public class Forces {
 			if (newMutations > 0) {
 		
 				// LEFT MUTATIONS
-				Infected leftMut = infecteds.getPosition(x - Parameters.dxy, y);
+				Class leftMut = infecteds.getPosition(x - Parameters.dxy, y);
 				inf.decrementStoredValue(newMutations);
 				leftMut.incrementStoredValue(newMutations);
 				
 				// RIGHT MUTATIONS
-				Infected rightMut = infecteds.getPosition(x + Parameters.dxy, y);
+				Class rightMut = infecteds.getPosition(x + Parameters.dxy, y);
 				inf.decrementStoredValue(newMutations);
 				rightMut.incrementStoredValue(newMutations);		
 				
 				if (Parameters.mutation2D) {
 				
 					// DOWN MUTATIONS
-					Infected downMut = infecteds.getPosition(x, y - Parameters.dxy);
+					Class downMut = infecteds.getPosition(x, y - Parameters.dxy);
 					inf.decrementStoredValue(newMutations);
 					downMut.incrementStoredValue(newMutations);
 					
 					// UP MUTATIONS
-					Infected upMut = infecteds.getPosition(x, y + Parameters.dxy);
+					Class upMut = infecteds.getPosition(x, y + Parameters.dxy);
 					inf.decrementStoredValue(newMutations);
 					upMut.incrementStoredValue(newMutations);				
 				
@@ -141,11 +141,11 @@ public class Forces {
 	
 		susceptible.pushStoredValue();
 	
-		for (Infected inf : infecteds) {
+		for (Class inf : infecteds) {
 			inf.pushStoredValue();
 		}
 		
-		for (Recovered rec : recovereds) {
+		for (Class rec : recovereds) {
 			rec.pushStoredValue();
 		}		
 	

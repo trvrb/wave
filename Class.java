@@ -1,17 +1,23 @@
-// Hosts recovered to a single strain.  Contains phenotype and quantity.
+// A class is a group of identical hosts.  Contains phenotype and quantity.
 
-public class Recovered {
+public class Class {
 
+	private String name;
 	private double xPos;
 	private double yPos;	
 	private double value;
 	private double storedValue;
 	
-    public Recovered(double x, double y, double v) {
+    public Class(String n, double x, double y, double v) {
+    	name = n;
     	xPos = x;
     	yPos = y;
-    	value = v;  
-    	storedValue = v;
+    	value = v;    
+    	storedValue = v;    	
+    }
+    
+    public String getName() {
+    	return name;
     }
     
     public double getXPos() {
@@ -24,13 +30,13 @@ public class Recovered {
     
     public double getValue() {
     	return value;
-    }        
-    
+    }    
+	
     public void setValues(double v) {
     	value = v;
     	storedValue = v;
-    }    
-    	
+    }	
+	
 	public void incrementStoredValue(double dx) {
 		storedValue += dx;
 		if (storedValue > 1) {
@@ -50,7 +56,7 @@ public class Recovered {
 	}
 
 	public void print() {
-		System.out.println("R (" + xPos + "," + yPos + ") = " + value);
+		System.out.println(name + " (" + xPos + "," + yPos + ") = " + value);
 	}
 		
 }
