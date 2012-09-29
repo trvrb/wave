@@ -103,31 +103,27 @@ public class Forces {
 			}
 			double newMutations = split * Parameters.mu * inf.getValue() * Parameters.dt;
 		
-			if (newMutations > 0) {
-		
-				// LEFT MUTATIONS
-				Class leftMut = infecteds.getPosition(x - Parameters.dxy, y);
+			// LEFT MUTATIONS
+			Class leftMut = infecteds.getPosition(x - Parameters.dxy, y);
+			inf.decrementStoredValue(newMutations);
+			leftMut.incrementStoredValue(newMutations);
+			
+			// RIGHT MUTATIONS
+			Class rightMut = infecteds.getPosition(x + Parameters.dxy, y);
+			inf.decrementStoredValue(newMutations);
+			rightMut.incrementStoredValue(newMutations);		
+			
+			if (Parameters.mutation2D) {
+			
+				// DOWN MUTATIONS
+				Class downMut = infecteds.getPosition(x, y - Parameters.dxy);
 				inf.decrementStoredValue(newMutations);
-				leftMut.incrementStoredValue(newMutations);
+				downMut.incrementStoredValue(newMutations);
 				
-				// RIGHT MUTATIONS
-				Class rightMut = infecteds.getPosition(x + Parameters.dxy, y);
+				// UP MUTATIONS
+				Class upMut = infecteds.getPosition(x, y + Parameters.dxy);
 				inf.decrementStoredValue(newMutations);
-				rightMut.incrementStoredValue(newMutations);		
-				
-				if (Parameters.mutation2D) {
-				
-					// DOWN MUTATIONS
-					Class downMut = infecteds.getPosition(x, y - Parameters.dxy);
-					inf.decrementStoredValue(newMutations);
-					downMut.incrementStoredValue(newMutations);
-					
-					// UP MUTATIONS
-					Class upMut = infecteds.getPosition(x, y + Parameters.dxy);
-					inf.decrementStoredValue(newMutations);
-					upMut.incrementStoredValue(newMutations);				
-				
-				}
+				upMut.incrementStoredValue(newMutations);				
 			
 			}
 		
@@ -153,6 +149,7 @@ public class Forces {
 	
 	public void clean() {
 		infecteds.clean();
+		recovereds.clean();
 	}
 
 }

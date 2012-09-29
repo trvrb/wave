@@ -7,7 +7,7 @@ public class Parameters {
 	public static double time = 0;										// start time of simulation
 	public static final double dt = 0.1;								// time step of simulation
 	public static final double dxy = 0.01;								// lattice spacing
-	public static final double threshold = Math.pow(10, -5);			// lower bound for a class to exist
+	public static final double threshold = Math.pow(10, -10);			// lower bound for a class to exist
 		
 	// epidemiological parameters
 	public static final double birthDeath = 9.1 * Math.pow(10, -5);		// in births per individual per day, 1/30 years = 0.000091

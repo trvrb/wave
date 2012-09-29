@@ -47,13 +47,13 @@ public class ClassSet implements Iterable<Class> {
 	}
 	
 	public void clean() {
-
-//		List<Infected> drop = new ArrayList<Infected>;	
-//		for (Infected inf : infecteds) {
-//			if (inf.getValue() < Parameters.threshold) {
-//				infecteds.remove(inf);
-//			}
-//		}
+		
+		for (Iterator<Class> i = set.iterator(); i.hasNext();) {
+			Class c = i.next();
+			if (c.getValue() < Parameters.threshold) {
+				i.remove();
+			}
+		}		
 
 	}
   
