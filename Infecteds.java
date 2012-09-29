@@ -1,11 +1,12 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class Infecteds implements Iterable<Infected> {
 
-    private List<Infected> infecteds = new ArrayList<Infected>();
+    private Set<Infected> infecteds = new HashSet<Infected>();
+    private Set<Infected> queuedInfecteds = new HashSet<Infected>();
 	
     public Infecteds() {
     	Infected inf = new Infected(Parameters.initialIPosition, 0, Parameters.initialIProportion);
@@ -23,12 +24,30 @@ public class Infecteds implements Iterable<Infected> {
     		}
     	}
     	
-    	// if no Infected exists, create one
+    	// if no Infected exists, add one to queue
     	Infected inf = new Infected(x, y, 0);
-    	infecteds.add(inf);
+    	queuedInfecteds.add(inf);
     	return inf;
     	
 	}      
+	
+	public void dequeue() {
+	
+		infecteds.addAll(queuedInfecteds);
+		queuedInfecteds.clear();
+	
+	}
+	
+	public void clean() {
+
+//		List<Infected> drop = new ArrayList<Infected>;	
+//		for (Infected inf : infecteds) {
+//			if (inf.getValue() < Parameters.threshold) {
+//				infecteds.remove(inf);
+//			}
+//		}
+
+	}
   
 	public void print() {
         for (Infected inf : infecteds) {
@@ -38,17 +57,15 @@ public class Infecteds implements Iterable<Infected> {
 	
 	public Iterator<Infected> iterator(){
 
-		return new Iterator<Infected>() {
-			private int count=0;
-		
+		final Iterator<Infected> i = infecteds.iterator();
+
+		return new Iterator<Infected>() {	
 			public boolean hasNext(){
-				return count < infecteds.size();
+				return i.hasNext();
 			}
-		
 			public Infected next(){
-				return infecteds.get(count++); 
+				return i.next(); 
 			}
-		
 			public void remove(){
 				throw new UnsupportedOperationException();
 			}

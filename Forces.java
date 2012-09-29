@@ -19,6 +19,7 @@ public class Forces {
  		recovery();
  		mutation();
     	pushStoredValues();
+    	clean();
     	Parameters.time += Parameters.dt;
     
     }
@@ -131,6 +132,8 @@ public class Forces {
 			}
 		
 		}
+		
+		infecteds.dequeue();
 	
 	}
 		
@@ -146,6 +149,10 @@ public class Forces {
 			rec.pushStoredValue();
 		}		
 	
+	}
+	
+	public void clean() {
+		infecteds.clean();
 	}
 
 }
