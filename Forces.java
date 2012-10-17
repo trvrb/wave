@@ -86,6 +86,8 @@ public class Forces {
 			rec.incrementStoredValue(newRecoveries);
 			
 		}
+		
+		recovereds.dequeue();
 	
 	}
 	

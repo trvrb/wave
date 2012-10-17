@@ -5,34 +5,18 @@ public class Wave {
 		ClassSet infecteds = new ClassSet("inf", Parameters.initialIPosition, 0, Parameters.initialIProportion);	
 		ClassSet recovereds = new ClassSet("rec", Parameters.initialRPosition, 0, Parameters.initialRProportion);
 		Forces forces = new Forces(susceptible, infecteds, recovereds);
-	
-		susceptible.print();
-		infecteds.print();	
-		recovereds.print();	
+					
+		System.out.println("time\tfS\tfI\tfR\txI\txR");
+		System.out.printf("%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\n", Parameters.time, susceptible.getValue(), infecteds.getValue(), recovereds.getValue(), infecteds.getMeanX(), recovereds.getMeanX());
 		
-		forces.step();
+		for (int i=0; i<1000; i++) {
+			forces.step();
+			if (Parameters.time % 1 < 0.5*Parameters.dt || Parameters.time % 1 > 1 - 0.5*Parameters.dt) {
+				System.out.printf("%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\n", Parameters.time, susceptible.getValue(), infecteds.getValue(), recovereds.getValue(), infecteds.getMeanX(), recovereds.getMeanX());
+			}
+		}
 		
-		susceptible.print();
-		infecteds.print();	
-		recovereds.print();	
+	//	infecteds.print();
 		
-		forces.step();
-		
-		susceptible.print();
-		infecteds.print();	
-		recovereds.print();	
-		
-		forces.step();
-		
-		susceptible.print();
-		infecteds.print();	
-		recovereds.print();	
-		
-		forces.step();
-		
-		susceptible.print();
-		infecteds.print();	
-		recovereds.print();			
-
 	}
 }

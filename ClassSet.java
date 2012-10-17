@@ -53,7 +53,7 @@ public class ClassSet implements Iterable<Class> {
 			if (c.getValue() < Parameters.threshold) {
 				i.remove();
 			}
-		}		
+		}	
 
 	}
   
@@ -61,6 +61,23 @@ public class ClassSet implements Iterable<Class> {
         for (Class c : set) {
         	c.print();
         }	
+	}
+	
+	public double getValue() {
+		double totalValue = 0;
+		for (Class c : set) {
+        	totalValue += c.getValue();
+        }
+        return totalValue;
+	}
+	
+	public double getMeanX() {
+		double mean = 0;
+		for (Class c : set) {
+        	mean += c.getXPos() * c.getValue();
+        }
+        mean /= getValue();
+        return mean;
 	}
 	
 	public Iterator<Class> iterator(){
