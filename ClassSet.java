@@ -80,6 +80,33 @@ public class ClassSet implements Iterable<Class> {
         return mean;
 	}
 	
+	public double getVarX() {
+		double var = 0;
+		for (Class c : set) {
+        	var += (c.getXPos() - getMeanX()) * (c.getXPos() - getMeanX()) * c.getValue();
+        }
+        var /= getValue();
+        return var;
+	}	
+	
+	public double getMeanY() {
+		double mean = 0;
+		for (Class c : set) {
+        	mean += c.getYPos() * c.getValue();
+        }
+        mean /= getValue();
+        return mean;
+	}
+	
+	public double getVarY() {
+		double var = 0;
+		for (Class c : set) {
+        	var += (c.getYPos() - getMeanY()) * (c.getYPos() - getMeanY()) * c.getValue();
+        }
+        var /= getValue();
+        return var;
+	}		
+	
 	public Iterator<Class> iterator(){
 
 		final Iterator<Class> i = set.iterator();
